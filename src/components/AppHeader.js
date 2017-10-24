@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { Segment, Input, Grid } from 'semantic-ui-react'
+import { Segment, Grid } from 'semantic-ui-react'
 
 class AppHeader extends Component {
   render() {

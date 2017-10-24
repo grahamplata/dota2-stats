@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { Header, Image, Table, Icon, Loader } from 'semantic-ui-react'
+import { Header, Table, Loader } from 'semantic-ui-react'
 import axios from 'axios'
 import moment from 'moment'
 import 'moment-duration-format'
@@ -45,7 +44,7 @@ class Results extends Component {
   }
 
   playerMatchResult(match, slot) {
-    if (match == slot) {
+    if (match === slot) {
       this.setState({ wins: this.state.wins + 1 })
       return <Table.Cell positive>Victory</Table.Cell>
     }
@@ -171,7 +170,6 @@ class Results extends Component {
     const deaths = this.state.matches.reduce((total, match) => total + match.deaths, 0);
     const kills = this.state.matches.reduce((total, match) => total + match.kills, 0);
     const time = this.state.matches.reduce((total, match) => total + match.duration, 0);
-    const winPercentage = this.state.matches.reduce((total, match) => total + match.radiant_win, 0);
 
     const footer = (
       <Table.Footer>

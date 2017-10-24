@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import { Segment } from 'semantic-ui-react'
 
 class Todo extends Component {
