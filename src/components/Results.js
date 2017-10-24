@@ -5,6 +5,7 @@ import axios from 'axios'
 import moment from 'moment'
 import 'moment-duration-format'
 import heroes from '../data/heroes.json'
+import games from '../data/games.json'
 import _ from 'lodash'
 
 const NUMBER_OF_MATCHES = 10;
@@ -14,8 +15,8 @@ class Results extends Component {
     super(props)
     this.state = {
       matches: [],
-      averages: [],
-      loading: true
+      loading: true,
+      wins: 0
     }
   }
 
@@ -30,96 +31,22 @@ class Results extends Component {
   }
 
   setGameType(game) {
-    switch (game) {
-      case 0:
-        return "Unknown"
-        break;
-      case 1:
-        return "All pick"
-        break;
-      case 2:
-        return "Captains mode"
-        break;
-      case 3:
-        return "Random draft"
-        break;
-      case 4:
-        return "Single draft"
-        break;
-      case 5:
-        return "All random"
-        break;
-      case 6:
-        return "Intro"
-      case 7:
-        return "The Diretide"
-        break;
-      case 8:
-        return "Reverse captains mode"
-        break;
-      case 9:
-        return "Greeviling"
-        break;
-      case 10:
-        return "Tutorial"
-        break;
-      case 11:
-        return "Least played"
-        break;
-      case 12:
-        return "New player pool"
-        break;
-      case 13:
-        return "New player pool"
-      case 14:
-        return "Compendium matchmaking"
-        break;
-      case 15:
-        return "Custom"
-        break;
-      case 16:
-        return "Captains draft"
-        break;
-      case 17:
-        return "Balanced draft"
-        break;
-      case 18:
-        return "Ability draft"
-        break;
-      case 19:
-        return "Event"
-        break;
-      case 20:
-        return "All random death match"
-      case 21:
-        return "1 vs. 1 solo mid"
-        break;
-      case 22:
-        return "All Draft"
-        break;
-    }
+    return _.find(games.games, { id: game }).name
   }
 
   setMatchWinner(match) {
-    if (match === true) {
-      return 'Radiant'
-    } else {
-      return 'Dire'
-
-    }
+    if (match === true) {return 'Radiant'}
+    return 'Dire'
   }
 
   setPlayerTeam(slot) {
-    if (slot <= 4) {
-      return 'Radiant'
-    } else {
-      return 'Dire'
-    }
+    if (slot <= 4) {return 'Radiant'}
+    return 'Dire'
   }
 
   playerMatchResult(match, slot) {
     if (match == slot) {
-      this.setState({ wins: this.state.count + 1 })
+      this.setState({ wins: this.state.wins + 1 })
       return <Table.Cell positive>Victory</Table.Cell>
     }
     return <Table.Cell negative>Loss</Table.Cell>
@@ -252,7 +179,7 @@ class Results extends Component {
           <Table.HeaderCell textAlign='center'>Averages</Table.HeaderCell>
           <Table.HeaderCell />
           <Table.HeaderCell />
-          <Table.HeaderCell />
+          <Table.HeaderCell textAlign='center'>{this.state.wins / 10}</Table.HeaderCell>
           <Table.HeaderCell>{moment.duration((time / NUMBER_OF_MATCHES), 'seconds').format("h [hrs], m [min]")}</Table.HeaderCell>
           <Table.HeaderCell textAlign='center'>{kills / NUMBER_OF_MATCHES}</Table.HeaderCell>
           <Table.HeaderCell textAlign='center'>{deaths / NUMBER_OF_MATCHES}</Table.HeaderCell>
