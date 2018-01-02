@@ -1,28 +1,19 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Container, Segment } from 'semantic-ui-react'
+import { Grid } from "semantic-ui-react";
 
-// Custom Components
-import Results from './components/Results'
-import Todo from './components/Todo'
-import AppHeader from './components/AppHeader'
-
-// Styles
-import 'semantic-ui-css/semantic.min.css';
-import './stylesheets/dota2minimapheroes.css';
-import './stylesheets/styles.css';
+//components
+import CalltoAction from './components/CalltoAction'
+import TableData from './components/TableData'
+import Footer from './components/Footer'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Container className="wrapper">
-          <AppHeader />
-          <Segment>
-            <Results />
-          </Segment>
-          <Todo />
-        </Container>
+        <CalltoAction />
+        <TableData />
+        <Footer />
       </div>
     );
   }
